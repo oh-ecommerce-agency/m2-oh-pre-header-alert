@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="OH_TopHeaderAlert::title"
+             title="OH - Top banner"
+             parent="Magento_Backend::content"
+             module="OH_TopHeaderAlert"
+             sortOrder="20"
+             resource="OH_TopHeaderAlert::settings"
+        />
+
+        <add id="OH_TopHeaderAlert::settings"
+             title="Setup"
+             module="OH_TopHeaderAlert"
+             sortOrder="10"
+             parent="OH_TopHeaderAlert::title"
+             action="adminhtml/system_config/edit/section/top_banner/"
+             resource="OH_TopHeaderAlert::settings"
+        />
+    </menu>
+</config>

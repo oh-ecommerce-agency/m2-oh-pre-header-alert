@@ -1,0 +1,28 @@
+<?php
+/** @var \OH\TopHeaderAlert\ViewModel\TopAlert $viewModel */
+$viewModel = $block->getViewModel();
+$currentPage = $block->getPage();
+$elements = $viewModel->getElements($currentPage);
+?>
+
+<?php if ($viewModel->getIsEnabled($currentPage) && $elements): ?>
+    <style>
+        <?=$viewModel->getCss()?>
+    </style>
+
+    <div class="oh-top-wrapper <?= $currentPage ?: '' ?>">
+        <span class="close">x</span>
+        <ul class="items">
+            <?php foreach ($elements as $element): ?>
+                <span class="item"><?= $element['text'] ?></span>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+    <script type="text/x-magento-init">
+        {
+            "*": {
+                "OH_TopHeaderAlert/js/view/slickenize": {}
+            }
+        }
+    </script>
+<?php endif; ?>

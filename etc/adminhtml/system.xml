@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+
+    <system>
+        <section id="top_banner" translate="label" sortOrder="20"
+                 showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Top banner</label>
+            <tab>oh_core</tab>
+            <resource>OH_TopHeaderAlert::settings</resource>
+            <group id="settings" translate="label"
+                   showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Settings</label>
+                <field id="enabled" translate="label comment" type="select"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable</label>
+                    <comment>Enable top banner</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="elements" translate="label" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Text</label>
+                    <frontend_model>OH\TopHeaderAlert\Block\Adminhtml\Form\Field\Text</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="css" type="textarea" translate="label" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Custom CSS</label>
+                    <comment>Add your styles here ---- Use top parent reference class .oh-top-wrapper .items .item</comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="settings_pdp" translate="label"
+                   showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Settings product page</label>
+                <field id="enabled" translate="label comment" type="select"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable</label>
+                    <comment>Enable top banner</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="products" translate="label comment" type="multiselect"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Products</label>
+                    <comment>Banner will show on product selected only</comment>
+                    <source_model>OH\TopHeaderAlert\Model\Source\Product</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="elements" translate="label" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Text</label>
+                    <frontend_model>OH\TopHeaderAlert\Block\Adminhtml\Form\Field\Text</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="css" type="textarea" translate="label" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Custom CSS</label>
+                    <comment>Add your styles here ---- Use top parent reference class .oh-top-wrapper .items .item</comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="settings_cat" translate="label"
+                   showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Settings category page</label>
+                <field id="enabled" translate="label comment" type="select"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable</label>
+                    <comment>Enable top banner</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="elements" translate="label" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Text</label>
+                    <frontend_model>OH\TopHeaderAlert\Block\Adminhtml\Form\Field\Text</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="css" type="textarea" translate="label" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Custom CSS</label>
+                    <comment>Add your styles here ---- Use top parent reference class .oh-top-wrapper .items .item</comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
