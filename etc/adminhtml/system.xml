@@ -5,7 +5,7 @@
     <system>
         <section id="top_banner" translate="label" sortOrder="20"
                  showInDefault="1" showInWebsite="1" showInStore="1">
-            <label>Top banner</label>
+            <label>Pre header alert</label>
             <tab>oh_core</tab>
             <resource>OH_TopHeaderAlert::settings</resource>
             <group id="settings" translate="label"

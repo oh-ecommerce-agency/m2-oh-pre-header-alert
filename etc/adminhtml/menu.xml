@@ -3,10 +3,10 @@
         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
     <menu>
         <add id="OH_TopHeaderAlert::title"
-             title="OH - Top banner"
-             parent="Magento_Backend::content"
+             title="Pre Header Alert"
+             parent="OH_Core::oh"
              module="OH_TopHeaderAlert"
-             sortOrder="20"
+             sortOrder="40"
              resource="OH_TopHeaderAlert::settings"
         />
 
