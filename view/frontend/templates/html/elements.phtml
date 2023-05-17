@@ -1,27 +1,26 @@
 <?php
 /** @var \OH\TopHeaderAlert\ViewModel\TopAlert $viewModel */
 $viewModel = $block->getViewModel();
-$currentPage = $block->getPage();
-$elements = $viewModel->getElements($currentPage);
+$elements = $viewModel->getElements();
+$backColor = $viewModel->getBackgroundColor();
+$textColor = $viewModel->getTextColor();
 ?>
 
-<?php if ($viewModel->getIsEnabled($currentPage) && $elements): ?>
-    <style>
-        <?=$viewModel->getCss()?>
-    </style>
-
-    <div class="oh-top-wrapper <?= $currentPage ?: '' ?>">
-        <span class="close">x</span>
+<?php if ($viewModel->getIsEnabled() && $elements): ?>
+    <div class="oh-top-wrapper" <?= $backColor ? sprintf('style="background-color: %s"', $backColor) : '' ?>>
+        <span class="close"></span>
         <ul class="items">
             <?php foreach ($elements as $element): ?>
-                <span class="item"><?= $element['text'] ?></span>
+                <span class="item" <?= $textColor ? sprintf('style="color: %s"', $textColor) : '' ?>><?= $element['text'] ?></span>
             <?php endforeach; ?>
         </ul>
     </div>
     <script type="text/x-magento-init">
         {
-            "*": {
-                "OH_TopHeaderAlert/js/view/slickenize": {}
+            ".oh-top-wrapper": {
+                "OH_TopHeaderAlert/js/view/slickenize": {
+                    "props": "<?=$escaper->escapeJs($viewModel->getSlickProps())?>"
+                }
             }
         }
     </script>

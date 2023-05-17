@@ -11,7 +11,7 @@
         />
 
         <add id="OH_TopHeaderAlert::settings"
-             title="Setup"
+             title="Settings"
              module="OH_TopHeaderAlert"
              sortOrder="10"
              parent="OH_TopHeaderAlert::title"

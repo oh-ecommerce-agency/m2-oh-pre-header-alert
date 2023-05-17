@@ -4,6 +4,7 @@ namespace OH\TopHeaderAlert\ViewModel;
 
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\DataObject;
+use Magento\Framework\Serialize\SerializerInterface;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 
 /**
@@ -18,54 +19,50 @@ class TopAlert extends DataObject implements ArgumentInterface
     private $configProvider;
 
     /**
-     * @var RequestInterface
+     * @var SerializerInterface
      */
-    private $requestInterface;
+    private $serializer;
 
     public function __construct(
-        RequestInterface $request,
+        SerializerInterface $serializer,
         \OH\TopHeaderAlert\Model\ConfigProvider $configProvider,
         array $data = []
     ) {
         parent::__construct($data);
         $this->configProvider = $configProvider;
-        $this->requestInterface = $request;
+        $this->serializer = $serializer;
     }
 
-    public function getIsEnabled($page)
+    public function getIsEnabled()
     {
-        return $this->configProvider->isEnable($page);
+        return $this->configProvider->isEnable();
     }
 
     public function getElements($page = null)
     {
-        switch ($page) {
-            case 'category-page':
-                return $this->configProvider->isEnable('cat') ? $this->configProvider->getElements('cat') : [];
-            case 'product-page':
-                //only show in products set by config
-                $productId = $this->requestInterface->getParam('id');
-                return $this->configProvider->isEnable('pdp') && in_array($productId,
-                    explode(',', $this->configProvider->getProducts())) ? $this->configProvider->getElements('pdp') : [];
-            default:
-                return $this->configProvider->getElements();
-        }
+        return $this->configProvider->getElements();
     }
 
-    public function getCss()
+    public function getBackgroundColor()
     {
-        return $this->configProvider->getCss($this->getPage());
+        return $this->configProvider->getBackgroundColor();
     }
 
-    public function getPage()
+    public function getTextColor()
     {
-        switch ($this->requestInterface->getFullActionName()) {
-            case 'catalog_category_view':
-                return 'cat';
-            case 'catalog_product_view':
-                return 'pdp';
-            default:
-                return null;
-        }
+        return $this->configProvider->getTextColor();
+    }
+
+    public function getSlickProps()
+    {
+        return $this->serializer->serialize([
+            'infinite' => true,
+            'autoplay' => true,
+            'autoplaySpeed' => 5000,
+            'arrows' => false,
+            'slidesToShow' => 1,
+            'speed' => 400,
+            'slidesToScroll' => 1
+        ]);
     }
 }

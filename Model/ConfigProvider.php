@@ -17,52 +17,7 @@ class ConfigProvider
     /**
      * @var string
      */
-    const XML_CONFIG_PATH_ENABLED = 'top_banner/settings/enabled';
-
-    /**
-     * @var string
-     */
-    const XML_CONFIG_PATH_ELEMENTS = 'top_banner/settings/elements';
-
-    /**
-     * @var string
-     */
-    const XML_CONFIG_PATH_CSS = 'top_banner/settings/css';
-
-    /**
-     * @var string
-     */
-    const XML_CONFIG_PATH_ENABLED_PDP = 'top_banner/settings_pdp/enabled';
-
-    /**
-     * @var string
-     */
-    const XML_CONFIG_PATH_ELEMENTS_PDP = 'top_banner/settings_pdp/elements';
-
-    /**
-     * @var string
-     */
-    const XML_CONFIG_PATH_CSS_PDP = 'top_banner/settings_pdp/css';
-
-    /**
-     * @var string
-     */
-    const XML_CONFIG_PATH_PRODUCTS = 'top_banner/settings_pdp/products';
-
-    /**
-     * @var string
-     */
-    const XML_CONFIG_PATH_ENABLED_CAT = 'top_banner/settings_cat/enabled';
-
-    /**
-     * @var string
-     */
-    const XML_CONFIG_PATH_ELEMENTS_CAT = 'top_banner/settings_cat/elements';
-
-    /**
-     * @var string
-     */
-    const XML_CONFIG_PATH_CSS_CAT = 'top_banner/settings_cat/css';
+    const XML_CONFIG_PATH = 'top_banner/settings/%s';
 
     /**
      * @var ScopeInterface
@@ -87,20 +42,9 @@ class ConfigProvider
      *
      * @return bool
      */
-    public function isEnable($page = null): ?bool
+    public function isEnable(): ?bool
     {
-        switch ($page) {
-            case 'pdp':
-                $pageConfig = self::XML_CONFIG_PATH_ENABLED_PDP;
-                break;
-            case 'cat':
-                $pageConfig = self::XML_CONFIG_PATH_ENABLED_CAT;
-                break;
-            default:
-                $pageConfig = self::XML_CONFIG_PATH_ENABLED;
-        }
-
-        return $this->scopeInterface->isSetFlag($pageConfig, ScopeInterface::SCOPE_STORE);
+        return $this->scopeInterface->isSetFlag(sprintf(self::XML_CONFIG_PATH, 'enabled'), ScopeInterface::SCOPE_STORE);
     }
 
     /**
@@ -108,22 +52,11 @@ class ConfigProvider
      *
      * @return array
      */
-    public function getElements($page = null): ?array
+    public function getElements(): ?array
     {
-        switch ($page) {
-            case 'pdp':
-                $pageConfig = self::XML_CONFIG_PATH_ELEMENTS_PDP;
-                break;
-            case 'cat':
-                $pageConfig = self::XML_CONFIG_PATH_ELEMENTS_CAT;
-                break;
-            default:
-                $pageConfig = self::XML_CONFIG_PATH_ELEMENTS;
-        }
-
         $res = [];
 
-        if ($elements = $this->scopeInterface->getValue($pageConfig, ScopeInterface::SCOPE_STORE)) {
+        if ($elements = $this->scopeInterface->getValue(sprintf(self::XML_CONFIG_PATH, 'elements'), ScopeInterface::SCOPE_STORE)) {
             foreach ($this->serializer->unserialize($elements) as $element) {
                 $res[] = $element;
             }
@@ -133,28 +66,22 @@ class ConfigProvider
     }
 
     /**
-     * Get custom css
+     * Get background color
      *
      * @return string
      */
-    public function getCss($page = null): ?string
+    public function getBackgroundColor()
     {
-        switch ($page) {
-            case 'pdp':
-                $pageConfig = self::XML_CONFIG_PATH_CSS_PDP;
-                break;
-            case 'cat':
-                $pageConfig = self::XML_CONFIG_PATH_CSS_CAT;
-                break;
-            default:
-                $pageConfig = self::XML_CONFIG_PATH_CSS;
-        }
-
-        return $this->scopeInterface->getValue($pageConfig, ScopeInterface::SCOPE_STORE);
+        return $this->scopeInterface->getValue(sprintf(self::XML_CONFIG_PATH, 'background_color'), ScopeInterface::SCOPE_STORE);
     }
-
-    public function getProducts()
+    
+    /**
+     * Get text color
+     *
+     * @return string
+     */
+    public function getTextColor()
     {
-        return $this->scopeInterface->getValue(self::XML_CONFIG_PATH_PRODUCTS, ScopeInterface::SCOPE_STORE);
+        return $this->scopeInterface->getValue(sprintf(self::XML_CONFIG_PATH, 'text_color'), ScopeInterface::SCOPE_STORE);
     }
 }

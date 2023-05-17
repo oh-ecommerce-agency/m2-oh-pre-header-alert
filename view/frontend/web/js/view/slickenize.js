@@ -1,29 +1,19 @@
 define([
-    'jquery',
-    'domReady',
-    'slick'
+	'jquery',
+	'domReady',
+	'slick'
 ], function ($, domReady) {
-    "use strict"
+	'use strict'
 
-    domReady(function () {
-        const preTopWrapperEl = '.oh-top-wrapper';
+	return function (config, element) {
+		$(element).find('ul').slick(JSON.parse(config.props));
 
-        $(preTopWrapperEl).find('ul').slick({
-            infinite: true,
-            autoplay: true,
-            autoplaySpeed: 5000,
-            arrows: false,
-            slidesToShow: 1,
-            speed: 400,
-            slidesToScroll: 1
-        });
+		$(element).find('.item').show();
 
-        $(preTopWrapperEl).find(' .item').show();
-
-        $(preTopWrapperEl).find('.close').click(function () {
-            $(preTopWrapperEl).hide('slow', function () {
-                $(preTopWrapperEl).remove();
-            });
-        });
-    });
+		$(element).find('.close').click(function () {
+			$(element).hide('fast', function () {
+				$(element).remove();
+			});
+		});
+	};
 });
