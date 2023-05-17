@@ -10,7 +10,7 @@
             <resource>OH_TopHeaderAlert::settings</resource>
             <group id="settings" translate="label"
                    showInDefault="1" showInWebsite="1" showInStore="1">
-                <label>Global</label>
+                <label>Settings</label>
                 <field id="enabled" translate="label comment" type="select"
                        showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Enable</label>
