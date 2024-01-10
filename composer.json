@@ -3,7 +3,7 @@
   "description": "N/A",
   "type": "magento2-module",
   "require": {
-    "php": ">=7.4",
+    "php": ">=7.3",
     "magento/framework": "*",
     "magento/module-catalog": "104.0.*",
     "m2-oh/module-core": "*"
